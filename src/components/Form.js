@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Form.module.css';
 import useSelect from './useSelect';
 
-const Form = () => {
+const Form = ({setCatego}) => {
 
     //Opciones para el select
     const OPTIONS = [
@@ -18,10 +18,17 @@ const Form = () => {
 
     //state hooks custom
     const [category, SetCategory] = useSelect('technology', OPTIONS);
+
+    //Al hacer submit, se pasa la categoria a el app.js [COmponente principal]
+    const searchNews = e =>{
+        e.preventDefault();
+        setCatego(category);
+    }
+
     return ( 
         <div className={` ${styles.search} row`}>
                 <div className="col s12 m8 offset-m2">
-                    <form>
+                    <form onSubmit={searchNews}>
                     <h2 className={styles.heading}>Encuentra Noticias por categoria</h2>
                     
                     <SetCategory/>
