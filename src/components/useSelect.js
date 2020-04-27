@@ -5,12 +5,20 @@ import React, {useState} from 'react';
 const useSelect = (stateInitial,options) => {
     
     //state del custom hook
-    const [state, updateState]=useState('')
+    const [state, updateState]=useState(stateInitial);
 
     const SelectNews=()=>(
-        <select className="browser-default">
+        <select 
+        className="browser-default" 
+        value={state} 
+        onChange={e => updateState(e.target.value)}
+        >
 
-             <option value=""> - - - Seleccione - - - </option>
+           {options.map(option =>(
+               <option key={option.value} value={option.value}> {option.label}</option>
+           ))
+
+           }
 
         </select>
 
